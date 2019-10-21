@@ -54,7 +54,7 @@ class Migration(migrations.Migration):
                 ('user_exp', models.IntegerField(verbose_name='用户经验值', default=0)),
                 ('user_lv', models.SmallIntegerField(verbose_name='用户等级', default=0)),
                 ('user_ach', models.CharField(verbose_name='用户成就', max_length=20)),
-                ('user', models.ForeignKey(verbose_name='所属账户', to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(verbose_name='所属账户', to=settings.AUTH_USER_MODEL, on_delete=True)),
             ],
             options={
                 'verbose_name': '用户中心',

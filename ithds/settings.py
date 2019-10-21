@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'g2av%l8wat7aiob#ed*6opvhte*m%3f!b%5a@35y#fm6$hnt$_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*']
@@ -46,15 +46,18 @@ INSTALLED_APPS = (
     'apps.goods',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    # 'django.contrib.messages.middleware.MessageMiddleware',
+    # 'django.contrib.sessions.middleware.SessionMiddleware'
+    # 'django.contrib.auth.middleware.AuthenticationMiddleware'
 )
 
 ROOT_URLCONF = 'ithds.urls'
@@ -86,8 +89,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ithds',
-        'USER': 'root',
-        'PASSWORD': 'doublecheng',
+        'USER': 'axzc',
+        'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': 3306
     }
@@ -128,23 +131,24 @@ TINYMCE_DEFAULT_CONFIG = {
 # 发送邮件配置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # smpt服务地址
-EMAIL_HOST = ''
-EMAIL_PORT = 
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 25
 # 发送邮件的邮箱
-EMAIL_HOST_USER = ''
+EMAIL_HOST_USER = '1016933825@qq.com'
 # 在邮箱中设置的客户端授权密码
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'hfkhnqefmokgbeec'
 # 收件人看到的发件人
-EMAIL_FROM = ''
+EMAIL_FROM = '<1016933825@qq.com>'
 
 
 # Django的缓存配置
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://192.168.1.52:6379/9",
+        "LOCATION": "redis://127.0.0.1:6379/9",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PASSWORD":"123456"
         }
     }
 }
@@ -153,5 +157,5 @@ CACHES = {
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"  # 保存到缓存
 SESSION_CACHE_ALIAS = "default"
 
-
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 LOGIN_URL = '/user/login'

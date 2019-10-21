@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.core.urlresolvers import reverse
+# from django.core.urlresolvers import reverse
+from django.urls import reverse
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired
 from celery_tasks.tasks import send_signup_active_email
@@ -26,6 +27,7 @@ class SignupView(View):
         password = request.POST.get('pwd')
         repassword = request.POST.get('repwd')
         email = request.POST.get('email')
+        print(username, password)
 
         # 检验信息是否填写完整
         if not all([username, password, email]):
@@ -54,7 +56,7 @@ class SignupView(View):
 
         # 进行业务处理 : 进行用户注册
         # 把校验完的数据 添加到 表里面
-        user = User.objects.create_user(username, email, password)
+        user = User.objects.create_user(username=username, email=email, password=password)
         user.is_active = 0
         user.save()
 
@@ -106,6 +108,7 @@ class LoginView(View):
         # 接收数据
         username = request.POST.get('username')
         password = request.POST.get('pwd')
+        print(username, password)
 
         # 校验数据完整性
         if not all([username, password]):
@@ -114,6 +117,7 @@ class LoginView(View):
 
         # 判断用户名密码
         user = authenticate(username=username, password=password)
+        print(user)
         if user is not None:
             # 用户名密码正确
             if user.is_active:

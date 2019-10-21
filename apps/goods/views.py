@@ -16,6 +16,8 @@ class IndexView(View):
 
         aricle = Article.objects.all()
         new_aricle = Article.objects.all().order_by('-create_time')
+        for ar in aricle:
+            print(ar.image)
 
         return render(request, 'index.html', {'aricle':aricle, 'new_aricle':new_aricle})
 

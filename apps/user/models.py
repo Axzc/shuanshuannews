@@ -15,7 +15,7 @@ class User(AbstractUser, BaseModel):
 
 class UserCenter(BaseModel):
     '''用户中心'''
-    user = models.ForeignKey('User', verbose_name='所属账户')
+    user = models.ForeignKey('User', verbose_name='所属账户', on_delete=True)
     user_exp = models.IntegerField(default=0, verbose_name='用户经验值')
     user_lv = models.SmallIntegerField(default=0, verbose_name='用户等级')
     user_ach = models.CharField(max_length=20, verbose_name='用户成就')
