@@ -66,7 +66,7 @@ class SignupView(View):
         token = serializer.dumps(info)  # bytes
         token = token.decode()
 
-        # 发送用户激活邮件
+        # 发送用户激活邮件 delay 调用任务
         send_signup_active_email.delay(email, username, token)
 
         return redirect(reverse('goods:index'))
@@ -122,7 +122,7 @@ class LoginView(View):
             # 用户名密码正确
             if user.is_active:
                 # 用户已激活
-                # 记录用户登录状态
+                # 记录用户登录状态, 保存session
                 login(request, user)
 
                 # 获取登录后要跳转的页面

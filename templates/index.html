@@ -54,16 +54,16 @@
 			<div class="col-sm-7">
 				<div class="new-list">
 
-                    {% for foo in aricle %}
+                    {% for foo in new_aricle %}
                         <div class="new-list-item clearfix">
                             <div class="col-xs-5">
-                            <img src="{% static  foo.image %}">
+                            <img src="{% static  foo.image.path %}" alt="wenz">
                             </div>
                             <div class="cor-xs-7">
                                 <a href="{% url 'goods:detail' foo.id%}" class="title">{{ foo.title }}</a>
 
                                 <div class="info">
-                                    <span><span class="avatar"><img src="{% static 'image/logo.png' %}"></span>tobi</span>·
+                                    <span><span class="avatar"><img src="{% static 'image/logo.png' %}" alt="1"></span>tobi</span>·
                                     <span>{{ foo.create_time }}发布</span>
                                 </div>
                             </div>

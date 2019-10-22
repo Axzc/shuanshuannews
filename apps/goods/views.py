@@ -3,6 +3,7 @@ from apps.user.models import User
 from django.views.generic import View
 from apps.goods.models import Article
 from django_redis import get_redis_connection
+from ithds.cache_model import article_cache
 
 
 
@@ -30,19 +31,19 @@ class ArticleDetailsView(View):
 
         user = request.user
 
-        print(user.username)
-
         # 最新发布
         new_aricle = Article.objects.all().order_by('-create_time')
-
         # 相关推荐
         recommend_aricle = Article.objects.all()
-
         # 文章主体
         aricle = Article.objects.get(id=aricle_id)
 
-        if user.is_authenticated():
+        if user.is_authenticated:
             # 判断用户是否登录
+
+            # 添加到缓存
+            alist = article_cache(aricle_id)
+
             # 添加历史浏览记录
             conn = get_redis_connection('default')
             history_key = 'history_%d' %user.id
@@ -53,10 +54,8 @@ class ArticleDetailsView(View):
             # 显示 最新 的 5条 ltrim 进行裁切
             conn.ltrim(history_key, 0, 4)
 
-
         # 整理上下文
         context = {'aricle':aricle, 'new_aricle':new_aricle, 'recommend':recommend_aricle}
-
 
 
         return render(request, 'detail.html', context)

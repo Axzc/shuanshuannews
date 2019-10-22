@@ -51,13 +51,10 @@ MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    # 'django.contrib.messages.middleware.MessageMiddleware',
-    # 'django.contrib.sessions.middleware.SessionMiddleware'
-    # 'django.contrib.auth.middleware.AuthenticationMiddleware'
+
 )
 
 ROOT_URLCONF = 'ithds.urls'
@@ -89,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ithds',
-        'USER': 'axzc',
-        'PASSWORD': '123456',
+        'USER': '',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': 3306
     }
@@ -131,31 +128,36 @@ TINYMCE_DEFAULT_CONFIG = {
 # 发送邮件配置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # smpt服务地址
-EMAIL_HOST = 'smtp.qq.com'
+EMAIL_HOST = ''
 EMAIL_PORT = 25
 # 发送邮件的邮箱
-EMAIL_HOST_USER = '1016933825@qq.com'
+EMAIL_HOST_USER = ''
 # 在邮箱中设置的客户端授权密码
-EMAIL_HOST_PASSWORD = 'hfkhnqefmokgbeec'
+EMAIL_HOST_PASSWORD = ''
 # 收件人看到的发件人
-EMAIL_FROM = '<1016933825@qq.com>'
+EMAIL_FROM = '<.com>'
 
 
-# Django的缓存配置
+# 作为cache的后端
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": "redis://127.0.0.1:6379/9",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "PASSWORD":"123456"
+            "PASSWORD":""
         }
     }
 }
 
-# 配置session存储
+# 作为Session后端
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"  # 保存到缓存
 SESSION_CACHE_ALIAS = "default"
+SESSION_REDIS_HOST = 'localhost'
+SESSION_REDIS_DB = 7
+SESSION_REDIS_PORT = 6379
+SESSION_REDIS_PASSWORD = ''
+SESSION_REDIS_PREFIX = "session"
 
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 LOGIN_URL = '/user/login'

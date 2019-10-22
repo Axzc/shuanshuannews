@@ -51,7 +51,7 @@
 				</blockquote>
 				<div>
 				</div>
-				<img src="{% static aricle.image %}" alt="">
+				<img src="{% static aricle.image.path %}" alt="">
                 {%autoescape off%}
                 {{ aricle.text }}
                 {% endautoescape %}
@@ -67,7 +67,7 @@
                         {% for aricle in recommend %}
                             <div class="item clearfix">
                                 <div class="col-xs-5 no-padding-h">
-                                    <img src="{% static aricle.image %}">
+                                    <img src="{% static aricle.image.path %}" alt="1">
                                 </div>
                                 <div class="col-xs-7">
                                     <a href="{% url 'goods:detail' aricle.id %}"class="title">{{ aricle.title }}</a>
